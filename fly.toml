@@ -1,0 +1,52 @@
+# fly.toml file generated for jophiel-cors-anywhere on 2022-12-05T13:12:31+09:00
+
+app = "jophiel-cors-anywhere"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  PORT = "8080"
+  CORSANYWHERE_WHITELIST = """http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com
+  http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-prop.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-fund-sandbox.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,
+  http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,
+  http://localhost:3000"""
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
