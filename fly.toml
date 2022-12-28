@@ -1,6 +1,6 @@
-# fly.toml file generated for jophiel-cors-anywhere on 2022-12-05T13:12:31+09:00
+# fly.toml file generated for dunamis-cors-everywhere-proxy-server on 2022-12-28T14:31:31+09:00
 
-app = "jophiel-cors-anywhere"
+app = "dunamis-cors-everywhere-proxy-server"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -9,9 +9,8 @@ processes = []
   builder = "heroku/buildpacks:20"
 
 [env]
-  PORT = "8080"
   CORSANYWHERE_WHITELIST = """http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com
+  http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com,
   http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,
   http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,
   http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,
@@ -20,6 +19,7 @@ processes = []
   http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,
   http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,
   http://localhost:3000"""
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
