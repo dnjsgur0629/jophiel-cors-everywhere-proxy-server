@@ -9,16 +9,7 @@ processes = []
   builder = "heroku/buildpacks:20"
 
 [env]
-  CORSANYWHERE_WHITELIST = """http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-prop.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-fund-sandbox.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,
-  http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,
-  http://localhost:3000"""
+  CORSANYWHERE_WHITELIST = "http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,http://localhost:3000"
   PORT = "8080"
 
 [experimental]
