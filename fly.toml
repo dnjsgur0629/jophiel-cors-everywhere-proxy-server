@@ -2,14 +2,14 @@
 
 app = "dunamis-cors-everywhere-proxy-server"
 kill_signal = "SIGINT"
-kill_timeout = 5
+kill_timeout = 20
 processes = []
 
 [build]
   builder = "heroku/builder:22"
 
 [env]
-  CORSANYWHERE_WHITELIST = "http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-crypto-portfolio-app.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-crypto-portfolio-app-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://localhost:3000,https://v2czvx-3000.csb.app,"
+  CORSANYWHERE_WHITELIST = "http://dunamis-analyst-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-2022.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-prop.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund-beta.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-analyst-app-fund.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-crypto-portfolio-app.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-crypto-portfolio-app-sandbox.s3-website.ap-northeast-2.amazonaws.com,http://dunamis-crypto-portfolio-app-beta.s3-website.ap-northeast-2.amazonaws.com,http://localhost:3000,https://v2czvx-3000.csb.app,"
   PORT = "8080"
 
 [experimental]
