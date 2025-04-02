@@ -1,55 +1,57 @@
-var nock = require('nock');
+import nock from 'nock'
+import http from 'http'
+
 if (parseInt(process.versions.node, 10) >= 8) {
   // See DEP0066 at https://nodejs.org/api/deprecations.html.
   // _headers and _headerNames have been removed from Node v8, which causes
   // nock <= 9.0.13 to fail. The snippet below monkey-patches the library, see
   // https://github.com/node-nock/nock/pull/929/commits/f6369d0edd2a172024124f
   // for the equivalent logic without proxies.
-  Object.defineProperty(require('http').ClientRequest.prototype, '_headers', {
-    get: function() {
-      var request = this;
-      // eslint-disable-next-line no-undef
+  Object.defineProperty(http.ClientRequest.prototype, '_headers', {
+    get: function () {
+      const request = this
+
       return new Proxy(request.getHeaders(), {
-        set: function(target, property, value) {
-          request.setHeader(property, value);
-          return true;
+        set: (target, property, value) => {
+          request.setHeader(property, value)
+          return true
         },
-      });
+      })
     },
-    set: function() {
+    set: () => {
       // Ignore.
     },
-  });
+  })
 }
 
-nock.enableNetConnect('127.0.0.1');
+nock.enableNetConnect('127.0.0.1')
 
-function echoheaders(origin) {
+const echoheaders = (origin) => {
   nock(origin)
     .persist()
     .get('/echoheaders')
-    .reply(function() {
-      var headers = this.req.headers;
-      var excluded_headers = [
+    .reply(() => {
+      const headers = nock.req.headers
+      const excluded_headers = [
         'accept-encoding',
         'user-agent',
         'connection',
         // Remove this header since its value is platform-specific.
         'x-forwarded-for',
         'test-include-xfwd',
-      ];
+      ]
       if (!('test-include-xfwd' in headers)) {
-        excluded_headers.push('x-forwarded-port');
-        excluded_headers.push('x-forwarded-proto');
+        excluded_headers.push('x-forwarded-port')
+        excluded_headers.push('x-forwarded-proto')
       }
-      var response = {};
-      Object.keys(headers).forEach(function(name) {
+      const response = {}
+      Object.keys(headers).forEach((name) => {
         if (excluded_headers.indexOf(name) === -1) {
-          response[name] = headers[name];
+          response[name] = headers[name]
         }
-      });
-      return response;
-    });
+      })
+      return response
+    })
 }
 
 nock('http://example.com')
@@ -58,8 +60,8 @@ nock('http://example.com')
   .reply(200, 'Response from example.com')
 
   .post('/echopost')
-  .reply(200, function(uri, requestBody) {
-    return requestBody;
+  .reply(200, (uri, requestBody) => {
+    return requestBody
   })
 
   .get('/setcookie')
@@ -121,37 +123,18 @@ nock('http://example.com')
 
   .get('/proxyerror')
   .replyWithError('throw node')
-;
 
-nock('https://example.com')
-  .persist()
-  .get('/')
-  .reply(200, 'Response from https://example.com')
-;
+nock('https://example.com').persist().get('/').reply(200, 'Response from https://example.com')
 
-nock('http://example.com.com')
-  .persist()
-  .get('/')
-  .reply(200, 'Response from example.com.com')
-;
+nock('http://example.com.com').persist().get('/').reply(200, 'Response from example.com.com')
 
-nock('http://example.com:1234')
-  .persist()
-  .get('/')
-  .reply(200, 'Response from example.com:1234')
-;
+nock('http://example.com:1234').persist().get('/').reply(200, 'Response from example.com:1234')
 
-nock('http://prefix.example.com')
-  .persist()
-  .get('/')
-  .reply(200, 'Response from prefix.example.com')
-;
+nock('http://prefix.example.com').persist().get('/').reply(200, 'Response from prefix.example.com')
 
-echoheaders('http://example.com');
-echoheaders('http://example.com:1337');
-echoheaders('https://example.com');
-echoheaders('https://example.com:1337');
+echoheaders('http://example.com')
+echoheaders('http://example.com:1337')
+echoheaders('https://example.com')
+echoheaders('https://example.com:1337')
 
-nock('http://robots.txt')
-  .get('/')
-  .reply(200, 'this is http://robots.txt');
+nock('http://robots.txt').get('/').reply(200, 'this is http://robots.txt')

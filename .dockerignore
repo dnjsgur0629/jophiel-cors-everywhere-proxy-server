@@ -1,17 +1,20 @@
-# flyctl launch added from .gitignore
-**\*.swp
-**\*.tmp
-**\*.log
+# 버전 관리 시스템 관련
+.git
+.gitignore
 
-**\coverage
-**\node_modules
+# IDE 및 편집기 관련 파일
+.idea
+.vscode
+.DS_Store
+**/*.swp
 
-# flyctl launch added from .idea\.gitignore
-# Default ignored files
-.idea\shelf
-.idea\workspace.xml
-# Editor-based HTTP Client requests
-.idea\httpRequests
-# Datasource local storage ignored files
-.idea\dataSources
-.idea\dataSources.local.xml
+# 의존성 디렉터리 (이미 Dockerfile에서 설치할 예정)
+node_modules
+# 로그 및 임시 파일
+**/*.tmp
+npm-debug.log
+yarn-error.log
+
+# 빌드 산출물 및 캐시
+coverage
+cache

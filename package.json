@@ -1,51 +1,39 @@
 {
   "name": "cors-anywhere",
-  "version": "0.4.4",
+  "version": "20250420A",
+  "type": "module",
   "description": "CORS Anywhere is a reverse proxy which adds CORS headers to the proxied request. Request URL is taken from the path",
   "license": "MIT",
   "author": "Rob Wu <rob@robwu.nl>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Rob--W/cors-anywhere.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Rob--W/cors-anywhere/issues/",
-    "email": "rob@robwu.nl"
-  },
-  "keywords": [
-    "cors",
-    "cross-domain",
-    "http-proxy",
-    "proxy",
-    "heroku"
-  ],
-  "main": "./lib/cors-anywhere.js",
-  "files": [
-    "lib/",
-    "test/",
-    "Procfile",
-    "demo.html",
-    "server.js"
-  ],
   "dependencies": {
-    "http-proxy": "1.11.1",
-    "proxy-from-env": "0.0.1"
+    "http-proxy": "^1.18.1",
+    "js-yaml": "^4.1.0",
+    "proxy-from-env": "^1.1.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
-    "eslint": "^2.2.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.23.0",
+    "eslint-plugin-mocha": "^10.5.0",
+    "globals": "^16.0.0",
     "istanbul": "^0.4.2",
     "lolex": "^1.5.0",
     "mocha": "^3.4.2",
-    "nock": "^8.2.1",
+    "nock": "^14.0.2",
+    "prettier": "^3.5.3",
     "supertest": "^2.0.1"
   },
   "scripts": {
     "lint": "eslint .",
     "test": "mocha ./test/test*.js --reporter spec",
-    "test-coverage": "istanbul cover ./node_modules/.bin/_mocha -- test/test.js test/test-ratelimit.js --reporter spec"
+    "test-coverage": "istanbul cover ./node_modules/.bin/_mocha -- test/test.js test/test-ratelimit.js --reporter spec",
+    "server": "cross-env NODE_ENV=development node server.js",
+    "server:prod": "cross-env NODE_ENV=production node server.js",
+    "deploy": "cross-env NODE_ENV=development bash ./build_and_push.zsh",
+    "deploy:prod": "cross-env NODE_ENV=production bash ./build_and_push.zsh",
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=20.0.0"
   }
 }

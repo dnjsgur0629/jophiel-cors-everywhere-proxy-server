@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  ratatoskr:
+    image: 723373476465.dkr.ecr.ap-northeast-2.amazonaws.com/dunamiscapital/proxy:sandbox
+    container_name: proxy
+    ports:
+      - "18000:18000"
+    environment:
+      - NODE_ENV=development
+    restart: always
+
